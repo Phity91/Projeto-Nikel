@@ -8,7 +8,7 @@ let data = {
 
 document.getElementById("button-logout").addEventListener("click",logout);
 document.getElementById("transactions-button").addEventListener("click", function(){
-    window.location.href = "transaction.html"
+    window.location.href = "transactions.html"
 })
 //ADICIONAR LANÇAMENTO
 
@@ -18,7 +18,7 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     const value = parseFloat(document.getElementById("value-input").value);
     const description = document.getElementById("description-input").value;
     const date = document.getElementById("date-input").value;
-    const type = document.querySelector('input(name="type-input"):checked').value;
+    const type = document.querySelector('input[name="type-input"]:checked').value;
 
     data.transactions.unshift({
         value: value,type:type, description:description, date:date
@@ -44,10 +44,10 @@ function checkLogged() {
         logged = session;
     }
 
-    if(logged) {
+    if(!logged) {
         
 
-        window.location.href = "home.html";
+        window.location.href = "index.html";
         return;
     }
 
@@ -60,7 +60,7 @@ function checkLogged() {
     getCashOut();
     getTotal();
 
-    //console(data);
+    
 }
 
 function logout() {
@@ -93,7 +93,7 @@ function getCashIn()
                 //console.log(cashIn(index));
                 cashInHtml += `
                 
-                div class="row mb-4">
+                <div class="row mb-4">
                                         <div class="col-12">
                                             <h3 class="fs-2"> ${cashIn[index].value.toFixed(2)}</h3>
                                             <div class="container p-0">
@@ -139,7 +139,7 @@ function getCashOut()
                 //console.log(cashIn(index));
                 cashInHtml += `
                 
-                div class="row mb-4">
+                <div class="row mb-4">
                                         <div class="col-12">
                                             <h3 class="fs-2"> ${cashIn[index].value.toFixed(2)}</h3>
                                             <div class="container p-0">

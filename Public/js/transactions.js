@@ -3,7 +3,7 @@ let logged = sessionStorage.getItem("logged");
 const session = localStorage.getItem("session");
 
 let data = {
-    transaction: []
+    transactions: []
 };
 
 document.getElementById("button-logout").addEventListener("click",logout);
@@ -18,9 +18,9 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     const value = parseFloat(document.getElementById("value-input").value);
     const description = document.getElementById("description-input").value;
     const date = document.getElementById("date-input").value;
-    const type = document.querySelector('input(name="type-input"):checked').value;
+    const type = document.querySelector('input[name="type-input"]:checked').value;
 
-    data.transaction.unshift({
+    data.transactions.unshift({
         value: value,type:type, description:description, date:date
 });
 
@@ -29,7 +29,7 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     e.target.reset();
     myModal.hide();
 
-    getTransaction();
+    getTransactions();
    
     alert("Laçamento adicionado com sucesso.");
 });
@@ -42,7 +42,7 @@ function checkLogged() {
         logged = session;
     }
 
-    if(logged) {
+    if(!logged) {
         
 
         window.location.href = "index.html";
@@ -54,7 +54,7 @@ function checkLogged() {
         data = JSON.parse(dataUser);
     }
 
-    getTransaction();
+    getTransactions();
 
     //console(data);
 }
@@ -66,19 +66,19 @@ function logout() {
     window.location.href = "index.html";
 }
 
-function getTransaction() {
-    const transaction = data.transaction;
-    let transactionHtml = ``;
+function getTransactions() {
+    const transactions = data.transactions;
+    let transactionsHtml = ``;
 
-    if(transaction.length) {
-        transaction.forEach((item) => {
+    if(transactions.length) {
+        transactions.forEach((item) => {
             let type = "Entrada";
 
             if(item, type ==="2") {
                 type= "Saída";
             }
 
-            transactionHtml += `
+            transactionsHtml += `
             <tr>
             <th scope="row">${item.date}</th>
             <td>${item.value.toFixed(2)}</td>
@@ -90,7 +90,7 @@ function getTransaction() {
         })
     }
 
-    document.getElementById("transactions-list").innerHTML = transactionHtml;
+    document.getElementById("transactions-list").innerHTML = transactionsHtml;
 }
 
 function saveData(data) {
